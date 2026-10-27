@@ -1,149 +1,167 @@
-# IMovies — Online Movie Ticket Booking System
+# 🎬 IMovies — Movie Discovery & Ticket Booking
 
-A production-grade, full-stack online movie ticket booking platform built with **React, Vite, TypeScript, Tailwind CSS, Node.js / Express, and atomic seat concurrency management**.
+IMovies is a movie-focused web application built with React, TypeScript, and Node.js. It features a modern user interface and a backend authentication system powered by Express.js and MongoDB.
 
----
+🌐 **Live Demo:** [IMovies](https://imovieticket.netlify.app/)
 
-## 📑 Quick Links & Downloads
+📂 **GitHub Repository:** [Vedantvijayvargiya-06/IMovies](https://github.com/Vedantvijayvargiya-06/IMovies)
 
-- 📥 **[Download Setup & Execution Guide (PDF)](./IMOVIES_SETUP_AND_EXECUTION_GUIDE.pdf)** (Also available in `/public/IMOVIES_SETUP_AND_EXECUTION_GUIDE.pdf` and directly inside the web app with 1 click).
-- 🎬 **Pre-seeded Blockbusters**: *They Call Him OG*, *RRR*, *Avatar: Fire and Ash*, *Toxic*, *G2*, *Chhatrapati Shivaji Maharaj*, *Baahubali 2*, *Kalki 2898 AD*.
-- 🏢 **Partner Theatres**: Srinivasa 4K Laser Dolby Atmos, Gokul 70mm, PVR Superplex IMAX & Luxe, INOX Megaplex.
+## ✨ Features
 
----
+- 🎥 Modern movie-focused user interface
+- 🔐 User registration and login
+- 🔑 Password hashing with bcrypt
+- 🪪 JWT-based authentication
+- 🗄️ MongoDB Atlas database integration
+- ⚡ Fast frontend development and production builds with Vite
+- 📱 Responsive web interface
+- ☁️ Live deployment with Netlify and Render
 
-## 🚀 Key Features
+## 🛠️ Tech Stack
 
-1. **Cinematic Responsive UI**:
-   - Modern dark theme (`#020617` and crimson red `#e50914` accents).
-   - Hero carousel with blockbuster trailers, ratings, and instant booking triggers.
-   - Movie catalog with real-time search and multi-filtering (Genre, Language, Format, Now Showing vs. Upcoming).
-   - Detailed movie modal with cast, director, synopsis, formats, and certification tags.
+**Frontend**
+- React
+- TypeScript
+- Vite
+- HTML and CSS
 
-2. **Theatre & Showtimes Scheduler**:
-   - Interactive date selector (Today, Tomorrow, Upcoming dates).
-   - Showtimes grouped by partner multiplexes with screen numbers and audio formats (IMAX 3D, Dolby Atmos, 4K Laser).
-   - Live seat inventory indicators ("Filling Fast", seat count remaining).
+**Backend**
+- Node.js
+- Express.js
+- MongoDB and Mongoose
+- bcrypt for password hashing
+- JSON Web Tokens (JWT)
 
-3. **Interactive 3-Tier Seat Matrix Engine**:
-   - Curved silver cinema screen with ambient light projection ("Screen this way").
-   - Categorized tiers:
-     - **Balcony / VIP**: Plush recliners, prime elevation (Rows A, B, C).
-     - **Middle / Executive**: Center eye-level sweet spot (Rows D, E, F, G, H).
-     - **Lower / Standard**: Front stalls (Rows J, K, L).
-   - Clear visual statuses: Available, Selected (crimson glow with checkmark), and Already Booked (dark crossed out).
-   - Dynamic cart summary sidebar with instant fare calculation, convenience fees, and GST breakdown.
+**Deployment**
+- Netlify — Frontend
+- Render — Backend
+- MongoDB Atlas — Database
 
-4. **Concurrency & Double-Booking Protection**:
-   - Atomic seat reservation cycle prevents two users from booking the same seat for the same show.
-   - Immediate conflict detection with descriptive seat collision messages.
+## 🚀 Getting Started
 
-5. **Demo Payment Gateway & E-Ticket Generation**:
-   - Realistic multi-mode checkout (UPI / QR, Credit/Debit Card, Net Banking, IMovies Cinema Wallet).
-   - Simulated bank processing with celebratory confetti on success.
-   - **Direct PDF E-Ticket Download**: Generates high-resolution cinema boarding pass with barcode and booking reference (`IMV-XXXXXX`).
+Follow these steps to run IMovies locally.
 
-6. **Customer Portal ("Your Bookings")**:
-   - Active and past booking history with movie posters, venue, timing, and seat numbers.
-   - 1-click "Download Ticket (PDF)".
-   - Instant ticket cancellation with automatic seat liberation back to the show.
+### 1. Clone the repository
 
-7. **Administrator Control Center**:
-   - Real-time cinema analytics: Gross Revenue (₹), Total Bookings, Active Movies, Partner Theatres, Occupancy Rate (%).
-   - **Movies Manager**: Publish new films, edit metadata, delete discontinued films.
-   - **Theatres Manager**: Add new partner multiplexes, configure screen count and tier pricing.
-   - **Showtimes Scheduler**: Schedule movie screenings across theatres, screens, dates, and times.
-   - **Master Bookings Ledger**: Search bookings by reference or customer, view payment IDs, and process admin refunds.
+```bash
+git clone https://github.com/Vedantvijayvargiya-06/IMovies.git
+cd IMovies
+```
 
----
+### 2. Install frontend dependencies
 
-## 👥 Default Demo Credentials
-
-The application is pre-seeded with two accounts for frictionless evaluation:
-
-| Role | Email | Password | Access Scope |
-| :--- | :--- | :--- | :--- |
-| **Customer (User)** | `user@imovies.com` | `user123` | Browse films, book seats, download PDF tickets, cancel reservations |
-| **Administrator** | `admin@imovies.com` | `admin123` | Full cinema management, add movies/shows, view gross revenue & metrics |
-
-*Note: You can switch between User and Admin roles instantly using the quick toggle in the navigation bar!*
-
----
-
-## 🛠️ Step-by-Step Installation & Local Execution
-
-### 1. Prerequisites
-- **Node.js**: v18.0.0 or higher (`node -v`)
-- **npm**: v9.0.0 or higher (`npm -v`)
-- Modern web browser (Chrome, Edge, Firefox, Safari)
-
-### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### 3. Environment Configuration
-Copy the sample environment file:
+### 3. Install backend dependencies
+
 ```bash
-cp .env.example .env
+cd server
+npm install
+cd ..
 ```
 
-### 4. Start the Application
-Start the dev server on port 3000:
+### 4. Configure environment variables
+
+Create a `.env` file inside the `server` directory.
+
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secure_jwt_secret
+```
+
+Replace the placeholder values with your own MongoDB connection string and a strong, private JWT secret.
+
+**Important:** Never commit your `.env` file or publish your database credentials or JWT secret.
+
+### 5. Start the backend
+
+Open a terminal in the project root and run:
+
+```bash
+npm run server
+```
+
+The backend should start on port `5000`, provided that the server uses this port locally.
+
+### 6. Start the frontend
+
+Open another terminal in the project root and run:
+
 ```bash
 npm run dev
 ```
 
-### 5. Access the Web Application
-Open your browser and navigate to:
-```
-http://localhost:3000
-```
+Open the local URL printed by Vite in your terminal.
 
----
+### 7. Build for production
 
-## 📄 Automated PDF Documentation
-
-To re-generate the official PDF guide from the terminal at any time:
 ```bash
-node scripts/generateGuidePdf.js
+npm run build
 ```
-This generates:
-- `public/IMOVIES_SETUP_AND_EXECUTION_GUIDE.pdf`
-- `IMOVIES_SETUP_AND_EXECUTION_GUIDE.pdf`
 
----
+The production frontend files will be generated in the `dist` directory.
 
-## 🌐 Core REST API Reference
+## 🌍 Live Deployment
 
-| Method | Endpoint | Authorization | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/login` | Public | Authenticate user or administrator |
-| `POST` | `/api/auth/register` | Public | Create new user or admin account |
-| `GET` | `/api/movie/getmovies` | Public | Retrieve catalog of active movies |
-| `POST` | `/api/movie/addmovie` | Admin Only | Add a new movie to catalog |
-| `DELETE` | `/api/movie/deletemovie/:id` | Admin Only | Remove movie from cinema roster |
-| `GET` | `/api/shows/getmovieshows/:name` | Public | Retrieve all scheduled shows for a film |
-| `POST` | `/api/shows/addshow` | Admin Only | Schedule a new screening |
-| `POST` | `/api/bookings/book` | User / JWT | Concurrency-safe atomic seat booking |
-| `POST` | `/api/bookings/cancel` | User / JWT | Cancel ticket and release reserved seats |
-| `GET` | `/api/bookings/allbookings` | Admin Only | Audit master ledger of all cinema bookings |
+| Component | Platform |
+|---|---|
+| Frontend | [Netlify](https://imovieticket.netlify.app/) |
+| Backend | [Render](https://imovies-backend-euan.onrender.com/) |
+| Database | MongoDB Atlas |
 
----
+## 🔐 Authentication
 
-## 🛡️ Concurrency & Double-Booking Safety
+The application includes user registration and login endpoints handled by the Express backend.
 
-When multiple customers attempt to purchase the exact same seat simultaneously:
-1. The transaction intercepts the chosen seats array.
-2. The show record is queried and existing `bookedSeats` are inspected.
-3. If an overlap exists, an HTTP 409 Conflict error is returned with the exact conflicting seats.
-4. If clear, the seats are appended atomically and a cryptographic booking reference (e.g. `IMV-839210`) is generated.
+- Passwords are hashed using bcrypt before storage.
+- JWT tokens are issued for successful authentication.
+- User information is stored in MongoDB.
+- The frontend communicates with the backend through HTTP API requests.
 
----
+For production use, ensure protected routes verify JWTs on the server and configure appropriate CORS and database network access restrictions.
 
-## 💻 Tech Stack Summary
+## 📁 Project Structure
 
-- **Frontend**: React 19, TypeScript, Vite 8, Tailwind CSS 4, Lucide Icons, canvas-confetti, jsPDF
-- **Backend**: Node.js, Express, REST APIs, JWT authentication, atomic concurrency engine
-- **Persistence**: Dual-engine architecture (MongoDB/Mongoose adapter with instant zero-config in-memory fallback)
-- **Export Engine**: Client-side & server-side PDF generator for tickets and deployment manuals
+```text
+IMovies/
+├── src/
+│   ├── api/
+│   │   └── authApi.ts
+│   ├── pages/
+│   │   ├── LoginPage.tsx
+│   │   └── RegisterPage.tsx
+│   └── ...
+├── server/
+│   ├── models/
+│   │   └── User.js
+│   ├── routes/
+│   │   └── auth.js
+│   ├── server.js
+│   └── .env
+├── public/
+├── index.html
+├── package.json
+├── vite.config.ts
+└── README.md
+```
+
+## 🔒 Security Notes
+
+- Keep all secrets in environment variables.
+- Do not expose MongoDB credentials in frontend code.
+- Use HTTPS for production API requests.
+- Restrict MongoDB Atlas network access whenever possible.
+- Validate authentication and authorization on the backend.
+
+## 👨‍💻 Author
+
+**Vedant Vijay Vargiya**
+
+GitHub: [@Vedantvijayvargiya-06](https://github.com/Vedantvijayvargiya-06)
+
+## 📄 License
+
+This project is available for learning and personal portfolio purposes. Add a license file if you intend to distribute it under a specific open-source license.
