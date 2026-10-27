@@ -1,5 +1,5 @@
 
-const API_URL = 'http://localhost:5000/api/auth';
+const API_URL = 'https://imovies-backend-euan.onrender.com/api/auth';
 
 export interface AuthResponse {
   success: boolean;
