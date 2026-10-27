@@ -18,24 +18,53 @@ import { getTodayDateString } from '../data/mockData';
 import { MovieTrailerModal } from '../components/MovieTrailerModal';
 import { MovieReviewsSection } from '../components/MovieReviewsSection';
 
+import { useParams, useNavigate } from 'react-router-dom';
+
 interface MovieShowsPageProps {
-  movie: Movie;
-  onBack: () => void;
-  onSelectShow: (show: Show) => void;
+  movie?: Movie;
+  onBack?: () => void;
+  onSelectShow?: (show: Show) => void;
   openAuthModal?: () => void;
 }
 
 export const MovieShowsPage: React.FC<MovieShowsPageProps> = ({
-  movie,
+  movie: propMovie,
   onBack,
   onSelectShow,
   openAuthModal,
 }) => {
-  const { shows, theatres, selectedCity } = useBooking();
+  const { movieName } = useParams<{ movieName: string }>();
+  const navigate = useNavigate();
+  const { shows, theatres, movies, selectedCity } = useBooking();
   const [selectedDateOffset, setSelectedDateOffset] = useState<number>(0);
   const [formatFilter, setFormatFilter] = useState<string>('ALL');
   const [activeTab, setActiveTab] = useState<'shows' | 'reviews'>('shows');
   const [isTrailerOpen, setIsTrailerOpen] = useState(false);
+
+  // Fallback to lookup from URL params if movie prop not provided
+  const movie =
+    propMovie ||
+    movies.find(
+      (m) =>
+        m.title.toLowerCase() === decodeURIComponent(movieName || '').toLowerCase() ||
+        m.id === movieName
+    ) ||
+    movies[0];
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      navigate('/home');
+    }
+  };
+
+  const handleSelectShow = (show: Show) => {
+    if (onSelectShow) {
+      onSelectShow(show);
+    }
+    navigate(`/seatspage/${show.id}`);
+  };
 
   const selectedDateStr = getTodayDateString(selectedDateOffset);
 
@@ -136,7 +165,7 @@ export const MovieShowsPage: React.FC<MovieShowsPageProps> = ({
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Top Navigation */}
       <button
-        onClick={onBack}
+        onClick={handleBack}
         className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
@@ -384,7 +413,7 @@ export const MovieShowsPage: React.FC<MovieShowsPageProps> = ({
                           return (
                             <button
                               key={show.id}
-                              onClick={() => onSelectShow(show)}
+                              onClick={() => handleSelectShow(show)}
                               className="group relative p-3 rounded-xl bg-slate-950 border border-slate-700/80 hover:border-red-500 hover:bg-slate-850 text-left transition-all hover:scale-105 active:scale-95 shadow-sm"
                             >
                               <div className="text-sm font-bold text-white group-hover:text-red-400 flex items-center gap-1.5">

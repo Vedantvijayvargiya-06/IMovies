@@ -22,23 +22,29 @@ import { SnacksSelector } from '../components/SnacksSelector';
 import { PaymentModal } from '../components/PaymentModal';
 import { TicketModal } from '../components/TicketModal';
 
+import { useParams, useNavigate } from 'react-router-dom';
+
 interface SeatsBookingPageProps {
-  movie: Movie;
-  show: Show;
-  onBack: () => void;
-  onBookingComplete: (booking: Booking) => void;
-  openAuthModal: () => void;
+  movie?: Movie;
+  show?: Show;
+  onBack?: () => void;
+  onBookingComplete?: (booking: Booking) => void;
+  openAuthModal?: () => void;
 }
 
 export const SeatsBookingPage: React.FC<SeatsBookingPageProps> = ({
-  movie,
-  show,
+  movie: propMovie,
+  show: propShow,
   onBack,
   onBookingComplete,
   openAuthModal,
 }) => {
+  const { showId } = useParams<{ showId: string }>();
+  const navigate = useNavigate();
   const { currentUser } = useAuth();
   const {
+    shows,
+    movies,
     selectedSeats,
     selectedTier,
     toggleSeat,
@@ -53,6 +59,23 @@ export const SeatsBookingPage: React.FC<SeatsBookingPageProps> = ({
     removePromoCode,
     createBooking,
   } = useBooking();
+
+  const show = propShow || shows.find((s) => s.id === showId) || shows[0];
+  const movie = propMovie || movies.find((m) => m.id === show?.movieId) || movies[0];
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      navigate(-1);
+    }
+  };
+
+  const handleBookingComplete = (booking: Booking) => {
+    if (onBookingComplete) {
+      onBookingComplete(booking);
+    }
+  };
 
   const [inputCode, setInputCode] = useState('');
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
@@ -79,11 +102,20 @@ export const SeatsBookingPage: React.FC<SeatsBookingPageProps> = ({
   const handleProceedToPayment = () => {
     setErrorMessage(null);
     if (!currentUser) {
-      openAuthModal();
+      if (openAuthModal) {
+        openAuthModal();
+      } else {
+        navigate('/login');
+      }
       return;
     }
     if (selectedSeats.length === 0) {
       setErrorMessage('Please click on at least one available seat to proceed.');
+      return;
+    }
+
+    if (!show) {
+      setErrorMessage('Show details could not be found.');
       return;
     }
 
@@ -105,18 +137,32 @@ export const SeatsBookingPage: React.FC<SeatsBookingPageProps> = ({
     try {
       const booking = await createBooking(paymentMethod, paymentId);
       setConfirmedBooking(booking);
-      onBookingComplete(booking);
+      handleBookingComplete(booking);
     } catch (err: any) {
       setErrorMessage(err.message || 'Booking conflict detected. Please select different seats.');
     }
   };
+
+  if (!show || !movie) {
+    return (
+      <div className="p-8 text-center text-slate-400">
+        <p>Show not found.</p>
+        <button
+          onClick={handleBack}
+          className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg font-bold"
+        >
+          Go Back
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
       {/* Top Breadcrumb */}
       <div className="flex items-center justify-between">
         <button
-          onClick={onBack}
+          onClick={handleBack}
           className="flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -389,7 +435,7 @@ export const SeatsBookingPage: React.FC<SeatsBookingPageProps> = ({
         onClose={() => setConfirmedBooking(null)}
         onViewAllBookings={() => {
           setConfirmedBooking(null);
-          onBack();
+          handleBack();
         }}
       />
     </div>
