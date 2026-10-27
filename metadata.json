@@ -1,0 +1,6 @@
+{
+  "name": "IMovies — Online Movie Ticket Booking System",
+  "description": "Production-grade online cinema and movie ticket booking web application with interactive seat maps, show scheduling, ticket generation, and admin management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
