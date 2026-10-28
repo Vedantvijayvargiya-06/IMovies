@@ -1,21 +1,18 @@
-# 🎬 IMovies — Movie Discovery & Ticket Booking
+# 🎬 IMovies — Movie Ticket Booking Demo
 
-IMovies is a movie-focused web application built with React, TypeScript, and Node.js. It features a modern user interface and a backend authentication system powered by Express.js and MongoDB.
+**IMovies** is a vibe-coded, full-stack movie ticket booking demo website created for learning, experimentation, and educational purposes.
 
-🌐 **Live Demo:** [IMovies](https://imovieticket.netlify.app/)
+🌐 **Live Demo:** [imovieticket.netlify.app](https://imovieticket.netlify.app/)
 
-📂 **GitHub Repository:** [Vedantvijayvargiya-06/IMovies](https://github.com/Vedantvijayvargiya-06/IMovies)
+📂 **GitHub Repository:** [IMovies](https://github.com/Vedantvijayvargiya-06/IMovies)
 
-## ✨ Features
+> **⚠️ Disclaimer:** This is a demo project built for learning purposes. It is not a production-ready ticket booking platform. Features, data, and workflows may be incomplete, simulated, or subject to change. Please do not use real payment information or rely on this website for actual bookings.
 
-- 🎥 Modern movie-focused user interface
-- 🔐 User registration and login
-- 🔑 Password hashing with bcrypt
-- 🪪 JWT-based authentication
-- 🗄️ MongoDB Atlas database integration
-- ⚡ Fast frontend development and production builds with Vite
-- 📱 Responsive web interface
-- ☁️ Live deployment with Netlify and Render
+## ✨ About the Project
+
+IMovies was created as a hands-on learning project to explore full-stack web development, AI-assisted coding (vibe coding), frontend design, backend APIs, database integration, and deployment.
+
+The goal is to experiment with building a movie-focused web application and understand how its different parts work together.
 
 ## 🛠️ Tech Stack
 
@@ -28,8 +25,9 @@ IMovies is a movie-focused web application built with React, TypeScript, and Nod
 **Backend**
 - Node.js
 - Express.js
-- MongoDB and Mongoose
-- bcrypt for password hashing
+- MongoDB Atlas
+- Mongoose
+- bcrypt
 - JSON Web Tokens (JWT)
 
 **Deployment**
@@ -37,9 +35,21 @@ IMovies is a movie-focused web application built with React, TypeScript, and Nod
 - Render — Backend
 - MongoDB Atlas — Database
 
-## 🚀 Getting Started
+## 🚀 Features
 
-Follow these steps to run IMovies locally.
+Depending on the current implementation, the project includes:
+
+- 🎥 Movie-focused user interface
+- 🔐 User registration and login
+- 🗄️ MongoDB database integration
+- 🔑 Password hashing and token-based authentication
+- 📱 Responsive web design
+- ⚡ React and Vite development workflow
+- ☁️ Live demo deployment
+
+Some features may be demonstrations or partially implemented. The application should not be considered a complete commercial ticket booking service.
+
+## 💻 Run Locally
 
 ### 1. Clone the repository
 
@@ -64,64 +74,39 @@ cd ..
 
 ### 4. Configure environment variables
 
-Create a `.env` file inside the `server` directory.
+Create a `.env` file inside the `server` folder:
 
 ```env
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_secure_jwt_secret
+JWT_SECRET=your_private_jwt_secret
 ```
 
-Replace the placeholder values with your own MongoDB connection string and a strong, private JWT secret.
-
-**Important:** Never commit your `.env` file or publish your database credentials or JWT secret.
+Replace the placeholder values with your own configuration. Never upload secrets or database credentials to GitHub.
 
 ### 5. Start the backend
 
-Open a terminal in the project root and run:
+From the project root:
 
 ```bash
 npm run server
 ```
 
-The backend should start on port `5000`, provided that the server uses this port locally.
-
 ### 6. Start the frontend
 
-Open another terminal in the project root and run:
+Open a second terminal in the project root:
 
 ```bash
 npm run dev
 ```
 
-Open the local URL printed by Vite in your terminal.
+Open the local URL displayed by Vite.
 
-### 7. Build for production
+### 7. Build the frontend
 
 ```bash
 npm run build
 ```
-
-The production frontend files will be generated in the `dist` directory.
-
-## 🌍 Live Deployment
-
-| Component | Platform |
-|---|---|
-| Frontend | [Netlify](https://imovieticket.netlify.app/) |
-| Backend | [Render](https://imovies-backend-euan.onrender.com/) |
-| Database | MongoDB Atlas |
-
-## 🔐 Authentication
-
-The application includes user registration and login endpoints handled by the Express backend.
-
-- Passwords are hashed using bcrypt before storage.
-- JWT tokens are issued for successful authentication.
-- User information is stored in MongoDB.
-- The frontend communicates with the backend through HTTP API requests.
-
-For production use, ensure protected routes verify JWTs on the server and configure appropriate CORS and database network access restrictions.
 
 ## 📁 Project Structure
 
@@ -129,39 +114,49 @@ For production use, ensure protected routes verify JWTs on the server and config
 IMovies/
 ├── src/
 │   ├── api/
-│   │   └── authApi.ts
 │   ├── pages/
-│   │   ├── LoginPage.tsx
-│   │   └── RegisterPage.tsx
 │   └── ...
 ├── server/
 │   ├── models/
-│   │   └── User.js
 │   ├── routes/
-│   │   └── auth.js
-│   ├── server.js
-│   └── .env
+│   └── server.js
 ├── public/
-├── index.html
 ├── package.json
 ├── vite.config.ts
 └── README.md
 ```
 
-## 🔒 Security Notes
+## 🧠 What I Learned
 
-- Keep all secrets in environment variables.
-- Do not expose MongoDB credentials in frontend code.
-- Use HTTPS for production API requests.
-- Restrict MongoDB Atlas network access whenever possible.
-- Validate authentication and authorization on the backend.
+This project is an opportunity to learn and experiment with:
+
+- Building interfaces with React and TypeScript
+- Connecting a frontend to a REST API
+- Implementing basic authentication flows
+- Working with MongoDB and Mongoose
+- Using environment variables for configuration
+- Deploying a frontend and backend separately
+- Exploring AI-assisted development through vibe coding
+- Debugging and improving a full-stack application
+
+## ⚠️ Limitations
+
+- This project is intended for learning and demonstration, not commercial use.
+- Some functionality may be incomplete, simulated, or unverified.
+- No real ticket purchase, payment, or refund should be assumed.
+- Security and production readiness have not been independently audited.
+- Availability of the live demo depends on the hosting services.
 
 ## 👨‍💻 Author
 
-**Vedant Vijay Vargiya**
+**Vedant Vijay**
 
 GitHub: [@Vedantvijayvargiya-06](https://github.com/Vedantvijayvargiya-06)
 
 ## 📄 License
 
-This project is available for learning and personal portfolio purposes. Add a license file if you intend to distribute it under a specific open-source license.
+This repository is shared for learning and demonstration. Unless a license file specifies otherwise, no additional open-source license is granted by this README.
+
+---
+
+*Built with curiosity, experimentation, and vibe coding. 🍿*
